@@ -1,9 +1,6 @@
 
 x <- read.csv("BP20160227.csv", header = T)
 x <- x[which(x$Measurement == "Blood Pressure"), ]
-x$Date <- ifelse(substring(x$Date, 1, 7) == " Feb 26", 
-       paste("2016/02/26", substring(x$Date, 17, 25)), 
-             paste("2016/02/25",substring(x$Date, 17, 25)))
 
 x$Month <- ifelse(substring(x$Date, 2 ,4)== "Feb", "02", substring(x$Date, 2 ,4))
 x$Day <- substring(x$Date, 6,7)
