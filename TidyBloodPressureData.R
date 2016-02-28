@@ -9,13 +9,15 @@ x$Day <- substring(x$Date, 6,7)
 x$TimeOfDay <- substring(x$Date, 23, 25)
 x$TimeOfDay <- ifelse(x$TimeOfDay == "AM ", "AM",
                       ifelse(x$TimeOfDay == " AM", "AM",
-                             ifelse(x$TimeOfDay == "PM ", "PM", "PM")))
+                             ifelse(x$TimeOfDay == "PM ", "PM",
+                                    ifelse(x$TimeOfDay == "AM", "AM", "PM"))))
 x$Hour <- ifelse(substring(x$Date, 18, 19) == "10", "10", 
                 ifelse(substring(x$Date, 18, 19) == "11", "11",
                                  ifelse(substring(x$Date, 18, 19) == "12", "12", 
                                                   substring(x$Date, 18, 18))))
 x$Hour <- as.numeric(x$Hour)
-x$Hour <- ifelse(x$TimeOfDay == "PM", x$Hour + 12, x$Hour)
+x$Hour <- ifelse(x$TimeOfDay == "AM" & x$Hour == "12", "00",
+                 ifelse(x$TimeOfDay == "PM", x$Hour + 12, x$Hour))
 
 x$Minute <- substring(x$Date, 18)
 x$Minute <- ifelse(substring(x$Minute,2,2)==":", substring(x$Minute, 3, 4), substring(x$Minute, 4 ,5))
