@@ -1,4 +1,4 @@
-
+# Download file from wellness app
 x <- read.csv("BP20160227.csv", header = T)
 x <- x[which(x$Measurement == "Blood Pressure"), ]
 
